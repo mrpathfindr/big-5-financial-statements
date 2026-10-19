@@ -1,6 +1,9 @@
 import ComparisonTable from "@/components/ComparisonTable";
+import FilingReactionTable from "@/components/FilingReactionTable";
 import MetricCharts from "@/components/MetricCharts";
+import StockChart from "@/components/StockChart";
 import { CALENDAR_YEAR, COMPANIES } from "@/lib/metrics";
+import { DAILY_PRICES, FILINGS, STOCKS } from "@/lib/prices";
 
 export default function Home() {
   return (
@@ -13,6 +16,22 @@ export default function Home() {
         Modeling Prep
       </p>
 
+      <h2 className="mb-3 text-[15px] font-semibold uppercase tracking-wider text-[#6b7280]">Share price</h2>
+      <div className="mb-8">
+        <StockChart stocks={STOCKS} prices={DAILY_PRICES} filings={FILINGS} />
+      </div>
+
+      <h2 className="mb-3 text-[15px] font-semibold uppercase tracking-wider text-[#6b7280]">
+        Price reaction to {CALENDAR_YEAR} filings
+      </h2>
+      <FilingReactionTable />
+      <p className="mb-10 mt-2 text-sm text-[#6b7280]">
+        Close-to-close change after each annual report submitted to the SEC in {CALENDAR_YEAR}, measured from the
+        close of the filing day (the day marked on the chart): +1 Day = next trading session, +1 Week = 5 sessions,
+        +1 Month = 21 sessions. Click a column header to rank the stocks by that return.
+      </p>
+
+      <h2 className="mb-3 text-[15px] font-semibold uppercase tracking-wider text-[#6b7280]">Annual statements</h2>
       <ComparisonTable />
       <p className="mb-10 mt-2 text-sm text-[#6b7280]">
         Click a metric row to rank companies by it. Green = best in row.
